@@ -42,18 +42,15 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 <!-- project guidance -->
 
 i am using json server i order to store detail of each card
-
-1. upgrade nuxt using below command
-    npx nuxi upgrade
-
-1. install packages using below command
-    npm install
-
-1. install axios using below command
+```bash
+3. install axios using below command
     npm install axios
-
-1. run json-server on port 4000 using below command
+```
+```bash
+4. run json-server on port 4000 using below command
     npx json-server db.json --port 4000
-
-2. run Nuxt project using
+```
+```bash
+5. run Nuxt project using
     npm run dev
+```
