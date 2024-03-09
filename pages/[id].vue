@@ -71,9 +71,10 @@ export default {
       <input type="text" id="status" v-model="card.status" />
 
       <label for="description">Description</label>
-      <input type="text" id="description" v-model="card.description" />
+      <textarea type="text" id="description" v-model="card.description"/>
 
       <div class="actions">
+          <button @click.prevent="$router.go(-1)">Back</button>
           <button @click.prevent="deleteCard">Delete</button>
           <button type="submit">Update</button>
       </div>
@@ -96,7 +97,7 @@ export default {
   text-align: center;
   margin-bottom: 20px;
 }
-input {
+input , textarea{
   width: 92%;
   padding: 10px 15px;
   border-radius: 5px;
@@ -128,5 +129,9 @@ button{
     margin-top: 30px;
     display: flex;
     justify-content: space-evenly;
+}
+#description{
+  resize: none;
+  min-height: 100px;
 }
 </style>
