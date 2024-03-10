@@ -35,10 +35,7 @@ async function onDrop(event, containerId) {
     <div class="cards-container" @drop="onDrop($event, container_id)" @dragenter.prevent @dragover.prevent >
       <Card
         v-for="card in cards"
-        :cardIndex="card.id"
-        :description="card.description"
-        :cardtitle="card.cardtitle"
-        :status="card.status"
+        :card="card"
         draggable="true"
         @dragstart="startDrag($event, card)"
       />
@@ -93,7 +90,9 @@ a {
   gap: 10px;
   color: gray;
   font-weight: 400;
-  box-shadow: none;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 .new,
 .right-side a {

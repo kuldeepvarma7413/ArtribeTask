@@ -1,22 +1,19 @@
 <template>
-    <NuxtLink :to="`/${cardIndex}`">
-        <div class="card" @click="updateCard">
-            <p class="card-heading">Card {{ cardIndex }}</p>
+    <NuxtLink :to="`/${card.id}`">
+        <div class="card" :card="card">
+            <p class="card-heading">Card {{ card.id }}</p>
         </div>
     </NuxtLink>
 </template>
 
 <script setup>
     const props=defineProps({
-        cardIndex: String,
-        cardtitle: String,
-        description: String,
-        status: String
+        card: Object
     });
 
 </script>
 
-<style scoped>
+<style>
 .card{
     padding: 10px;
     border-radius: 5px;

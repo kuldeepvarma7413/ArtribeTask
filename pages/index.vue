@@ -143,4 +143,54 @@
     .popup.show{
         display: block;
     }
+    .myForm {
+        padding: 20px 40px;
+        width: 400px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0px 5px rgb(197, 197, 197);
+        border-radius: 5px;
+    }
+    .myForm p {
+       text-align: center;
+        margin-bottom: 20px;
+    }
+    input , textarea{
+        width: 92%;
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        background-color: #f5f5f5;
+        font-size: 16px;
+    }
+    label{
+        text-align: left;
+    }
+    .top-heading{
+        width: 100%;
+        color: white;
+        background-color:rgb(170, 170, 170);
+        border-radius: 5px;
+        padding: 10px 0px;
+    }
+    button{
+        cursor: pointer;
+        width: 100px;
+        padding: 5px 20px;
+        background-color: rgb(224,224,224);
+        outline: none;
+        border: none;
+        border-radius: 15px;
+    }
+    .actions{
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    #description{
+        resize: none;
+        min-height: 100px;
+    }
 </style>
