@@ -44,7 +44,12 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 i am using json server i order to store detail of each card
 ```bash
 3. install axios using below command
+```bash
+3. install axios using below command
     npm install axios
+```
+```bash
+4. run json-server on port 4000 using below command
 ```
 ```bash
 4. run json-server on port 4000 using below command
@@ -52,5 +57,10 @@ i am using json server i order to store detail of each card
 ```
 ```bash
 5. run Nuxt project using
+```
+```bash
+5. run Nuxt project using
     npm run dev
+```
+
 ```
