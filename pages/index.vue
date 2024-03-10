@@ -41,13 +41,6 @@
             // filter cards
             filtercards(containerId){
                 return this.cards.filter(card=> card.container_id==containerId);
-            }, 
-            // change container_id
-            moveCardToContainer(current_cnt_id, card_id){
-                const card= this.cards.find(card=> card.id == card_id)
-                if(!card) throw Error("Card not found")
-                card.container_id=current_cnt_id
-                axios.put(`http://localhost:4000/cards/${card.id}`, card).then(()=>{console.log("Card moved")}).catch("Error while dropping card")
             },
             // create card
             createCard(){
@@ -63,6 +56,13 @@
                 this.resetForm();
                 this.showAndHidePopup()
             },
+            // change container_id
+            moveCardToContainer(current_cnt_id, card_id){
+                const card= this.cards.find(card=> card.id == card_id)
+                if(!card) throw Error("Card not found")
+                card.container_id=current_cnt_id
+                axios.put(`http://localhost:4000/cards/${card.id}`, card).then(()=>{console.log("Card moved")}).catch("Error while dropping card")
+            },
             // show popup
             showAndHidePopup(container_id=0){
                 document.getElementById('popup').classList.toggle('show');
@@ -72,16 +72,16 @@
             resetForm(){
                 this.formData = {"title":"", "description":"", "status":"", "container_id":0}
             }
-        },
+        }
     }
+     
 </script>
 
 <template>
     <div class="main-container">
-        <!-- all 3 containers -->
-        <taskContainer :title="'Not Started'" :container_id="1" :color="`#fca7b8`" :cards="filtercards(1)" @onmove="this.moveCardToContainer" @create="this.showAndHidePopup"/>
-        <taskContainer :title="'In Progress'" :container_id="2" :color="`#fce3a7`" :cards="filtercards(2)" @onmove="this.moveCardToContainer" @create="this.showAndHidePopup"/>
-        <taskContainer :title="'Completed'" :container_id="3" :color="`#a7fcd0`" :cards="filtercards(3)" @onmove="this.moveCardToContainer" @create="this.showAndHidePopup"/>
+        <taskContainer :title="'Not Started'" :container_id="1" :color="`#fca7b8`" :cards="filtercards(1)" @onmove="moveCardToContainer" @create="showAndHidePopup"/>
+        <taskContainer :title="'In Progress'" :container_id="2" :color="`#fce3a7`" :cards="filtercards(2)" @onmove="moveCardToContainer" @create="showAndHidePopup"/>
+        <taskContainer :title="'Completed'" :container_id="3" :color="`#a7fcd0`" :cards="filtercards(3)" @onmove="moveCardToContainer" @create="showAndHidePopup"/>
     </div>
     
     <!-- popup to add new info -->
