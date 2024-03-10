@@ -164,6 +164,7 @@
         outline: none;
         background-color: #f5f5f5;
         font-size: 16px;
+        resize: none;
     }
     label{
         text-align: left;
@@ -188,9 +189,5 @@
         margin-top: 30px;
         display: flex;
         justify-content: space-evenly;
-    }
-    #description{
-        resize: none;
-        min-height: 100px;
     }
 </style>
