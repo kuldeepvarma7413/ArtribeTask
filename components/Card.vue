@@ -16,7 +16,7 @@
 
 </script>
 
-<style>
+<style scoped>
 .card{
     padding: 10px;
     border-radius: 5px;
@@ -25,6 +25,8 @@
     font-weight: 500;
     cursor: move;
     transition: transform 0.2s ease-in-out;
+    border-top: 3px solid rgb(98, 190, 255);
+    padding-top: 7px;
 }
 .card p{
     cursor: pointer;

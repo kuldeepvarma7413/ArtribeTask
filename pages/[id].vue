@@ -105,6 +105,7 @@ input , textarea{
   outline: none;
   background-color: #f5f5f5;
   font-size: 16px;
+  resize: none;
 }
 label{
     text-align: left;
@@ -130,8 +131,7 @@ button{
     display: flex;
     justify-content: space-evenly;
 }
-#description{
-  resize: none;
+textarea{
   min-height: 100px;
 }
 </style>

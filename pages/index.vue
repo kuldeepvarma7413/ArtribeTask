@@ -6,7 +6,13 @@
         data(){
             return{
                 cards: [],
-                uniqueIndex: ""
+                uniqueIndex: "",
+                formData:{
+                    title: "",
+                    status: "Not Started",
+                    description: "",
+                    container_id: 0
+                }
             };
         },
         async mounted(){
@@ -44,10 +50,27 @@
                 axios.put(`http://localhost:4000/cards/${card.id}`, card).then(()=>{console.log("Card moved")}).catch("Error while dropping card")
             },
             // create card
-            createCard(container_id){
-                const card={"id":(this.uniqueIndex++).toString() ,"title": "", "description": "", "status": "", "container_id": container_id}
+            createCard(){
+                // console.log("contid",this.formData.title)
+                const card={"id":(this.uniqueIndex++).toString(),
+                        "title": this.formData.title,
+                        "description": this.formData.description,
+                        "status": this.formData.status,
+                        "container_id": this.formData.container_id }
                 this.cards.push(card)
                 axios.post(`http://localhost:4000/cards`, card).then(()=>{console.log("Card moved")}).catch("Error creating card");
+                // clear form data and hide popup
+                this.resetForm();
+                this.showAndHidePopup()
+            },
+            // show popup
+            showAndHidePopup(container_id=0){
+                document.getElementById('popup').classList.toggle('show');
+                this.formData.container_id=container_id
+            },
+            // reset form data
+            resetForm(){
+                this.formData = {"title":"", "description":"", "status":"", "container_id":0}
             }
         },
     }
@@ -56,10 +79,32 @@
 <template>
     <div class="main-container">
         <!-- all 3 containers -->
-        <taskContainer :title="'Not Started'" :container_id="1" :color="`#fca7b8`" :cards="filtercards(1)" @onmove="this.moveCardToContainer" @create="this.createCard"/>
-        <taskContainer :title="'In Progress'" :container_id="2" :color="`#fce3a7`" :cards="filtercards(2)" @onmove="this.moveCardToContainer" @create="this.createCard"/>
-        <taskContainer :title="'Completed'" :container_id="3" :color="`#a7fcd0`" :cards="filtercards(3)" @onmove="this.moveCardToContainer" @create="this.createCard"/>
+        <taskContainer :title="'Not Started'" :container_id="1" :color="`#fca7b8`" :cards="filtercards(1)" @onmove="this.moveCardToContainer" @create="this.showAndHidePopup"/>
+        <taskContainer :title="'In Progress'" :container_id="2" :color="`#fce3a7`" :cards="filtercards(2)" @onmove="this.moveCardToContainer" @create="this.showAndHidePopup"/>
+        <taskContainer :title="'Completed'" :container_id="3" :color="`#a7fcd0`" :cards="filtercards(3)" @onmove="this.moveCardToContainer" @create="this.showAndHidePopup"/>
     </div>
+    
+    <!-- popup to add new info -->
+    <div class="popup" id="popup">
+        <form @submit.prevent="createCard" class="myForm">
+            <p class="top-heading">Add Card</p>
+
+            <label for="title">Title</label>
+            <input type="text" v-model="formData.title"/>
+
+            <label for="status">Status</label>
+            <input type="text" v-model="formData.status"/>
+
+            <label for="description">Description</label>
+            <textarea type="text" v-model="formData.description"/>
+
+            <div class="actions">
+                <button @click.prevent="showAndHidePopup">Back</button>
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
 </template>
 
 <style>
@@ -74,5 +119,28 @@
     ::-webkit-scrollbar-thumb{
         background-color: gray;
         border-radius: 10px;
+    }
+    /* popup */
+    .popup{
+        display: none;
+        position: fixed;
+        background-color: rgba(0,0,0,0.3);
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        transition: ease-in-out 1s;
+    }
+    .popup form{
+        background-color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+    }
+    .popup.show{
+        display: block;
     }
 </style>
